@@ -5,9 +5,10 @@
  */
 package controller;
 
-import java.net.BindException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.validation.BindException;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.SimpleFormController;
 import service.HelloService;
@@ -57,7 +58,7 @@ public class HelloController extends SimpleFormController {
     }
      */
 
-
+@SuppressWarnings("deprecation")
 @Override
 protected ModelAndView onSubmit(
             HttpServletRequest request,
@@ -73,8 +74,8 @@ protected ModelAndView onSubmit(
 
 public void setHelloService(HelloService helloService) {
     this.helloService = helloService;
-
+}
 private HelloService helloService;
 
-}
+
 }
