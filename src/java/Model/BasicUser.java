@@ -9,8 +9,7 @@ import java.io.Serializable;
 
 
 /**
- *
- * @author DEV
+ * * @author DEV
  */
 public class BasicUser implements Serializable {
   

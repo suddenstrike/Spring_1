@@ -6,15 +6,18 @@
 package Model;
 
 import java.util.List;
-
 /**
  *
  * @author DEV
  */
-public interface UserMgmtBase {
-    public  UserMgmtBase getUserMgmt();
-    public int registerUser( String email, String pass);
-    public void deregisterUser( String email );
-    public List<BasicUser> getUserList();
+public interface UserMgmtDAOIface {
  
+    public  UserMgmtDAOIface getUserMgmtDAO();
+
+    public int registerUser( String email, String pass);
+
+    public void deregisterUser( String email );
+
+    public List<BasicUser> getUserList();
+
 }

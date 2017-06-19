@@ -14,20 +14,22 @@ import java.util.Map;
  *
  * @author DEV
  */
-public class UserMgmtMemory implements UserMgmtBase{
+public class UserMgmtInMemoryDAO implements UserMgmtDAOIface{
     
-    private static UserMgmtMemory instance = new UserMgmtMemory();
+    private static final UserMgmtInMemoryDAO instance = new UserMgmtInMemoryDAO();
             
         
-    protected UserMgmtMemory(){
+    protected UserMgmtInMemoryDAO(){
         }
     
-    public UserMgmtMemory getUserMgmt() {
+    @Override
+    public UserMgmtInMemoryDAO getUserMgmtDAO() {
         return getInstance();
     }
-    protected static UserMgmtMemory getInstance() {
+    protected static UserMgmtInMemoryDAO getInstance() {
             return instance;
         }
+    @Override
     public int registerUser( String email, String pass) {
         
             BasicUser user = new BasicUser( email, pass );
@@ -36,20 +38,23 @@ public class UserMgmtMemory implements UserMgmtBase{
             return 0;
         }
         
+    @Override
     public void deregisterUser( String email ) {
             
             userMap.remove(email);
     }
     
+    @Override
     public List<BasicUser> getUserList() {
-        List<BasicUser> userList = new ArrayList<BasicUser>();
+        List<BasicUser> userList = new ArrayList<>();
         
-        for( Map.Entry m:userMap.entrySet())
+        userMap.entrySet().forEach((m) -> {
             userList.add( (BasicUser)m.getValue());
+        });
         
         return userList;
     }
     
-    private static Map<String, Object> userMap = new HashMap<String, Object>();
+    private static final Map<String, Object> userMap = new HashMap<String, Object>();
 
 }
