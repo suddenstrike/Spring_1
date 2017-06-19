@@ -6,6 +6,7 @@
 package controller;
 
 
+import Model.UserMgmtFactory;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.validation.BindException;
@@ -69,6 +70,10 @@ protected ModelAndView onSubmit(
         Name name = (Name) command;
         ModelAndView mv = new ModelAndView(getSuccessView());
         mv.addObject("helloMessage", helloService.sayHello(name.getValue()));
+        
+        UserMgmtFactory usrMgmtFactory = new UserMgmtFactory();
+        usrMgmtFactory.getUserMgmt(1).registerUser(name.getValue(), name.getValue());
+        
         return mv;
 }
 
