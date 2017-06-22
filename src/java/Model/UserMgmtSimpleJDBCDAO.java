@@ -6,6 +6,9 @@
 package Model;
 
 import java.util.List;
+import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 /**
@@ -16,17 +19,29 @@ public class UserMgmtSimpleJDBCDAO implements UserMgmtDAOIface{
     
     private static final UserMgmtSimpleJDBCDAO instance = new UserMgmtSimpleJDBCDAO();
   
-    private  DriverManagerDataSource dataSource;
+    private  static final DriverManagerDataSource dataSource;
+    private  static  final JdbcTemplate jdbcTemplate;
     
-    public UserMgmtSimpleJDBCDAO() {
+    
+    static{
         dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://localhost:3306/test"); // ("jdbc:hsqldb:hsql://localhost:");
         dataSource.setUsername("root");
         dataSource.setPassword("Strucc%Tigris86");
-
-
+        //@Autowired
+        jdbcTemplate = new JdbcTemplate(dataSource);
+        
     }
+             
+    
+
+    public UserMgmtSimpleJDBCDAO() {
+    }
+
+  
+
+    
     
     protected static UserMgmtSimpleJDBCDAO getInstance() {
             return instance;
@@ -38,7 +53,9 @@ public class UserMgmtSimpleJDBCDAO implements UserMgmtDAOIface{
        }
 
     @Override
-    public int registerUser( String email, String pass) {
+    public int registerUser( BasicUser user ) {
+            int rowCount = this.jdbcTemplate.queryForObject("select count(*) from tbl_user", Integer.class);
+  
         return 0;
     }
             

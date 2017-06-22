@@ -14,8 +14,7 @@ import java.io.Serializable;
 public class BasicUser implements Serializable {
   
     
-    private String UserEmail;
-    private String UserPass;
+    private String UserEmail;    private String UserPass;
     
     public BasicUser(String email, String pass) {
         setUserEmail( email );

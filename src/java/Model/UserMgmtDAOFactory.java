@@ -18,7 +18,7 @@ public class UserMgmtDAOFactory {
                 userMgmt = (UserMgmtDAOIface) new UserMgmtInMemoryDAO();
             break;
             case 2:
-                userMgmt = (UserMgmtDAOIface) new UserMgmtSimpleJDBCDAO();
+                userMgmt = (UserMgmtSimpleJDBCDAO) new UserMgmtSimpleJDBCDAO();
             break;
         }
         return userMgmt.getUserMgmtDAO();

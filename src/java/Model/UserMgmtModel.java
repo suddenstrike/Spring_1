@@ -21,7 +21,7 @@ public class UserMgmtModel implements UserMgmtIface{
     
     public int registerUser( String email, String pass) {
         
-        return userMgmtDAOFactory.getUserMgmtDAO(2).registerUser(email, pass);
+        return userMgmtDAOFactory.getUserMgmtDAO(2).registerUser( new BasicUser( email, pass ));
     }
 
     

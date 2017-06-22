@@ -30,10 +30,10 @@ public class UserMgmtInMemoryDAO implements UserMgmtDAOIface{
             return instance;
         }
     @Override
-    public int registerUser( String email, String pass) {
+    public int registerUser( BasicUser user ) {
         
-            BasicUser user = new BasicUser( email, pass );
-            userMap.put( email, user );
+            
+            userMap.put( user.getUserEmail(), user.getUserPass() );
             
             return 0;
         }

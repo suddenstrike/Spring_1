@@ -14,7 +14,7 @@ public interface UserMgmtDAOIface {
  
     public  UserMgmtDAOIface getUserMgmtDAO();
 
-    public int registerUser( String email, String pass);
+    public int registerUser( BasicUser user);
 
     public void deregisterUser( String email );
 
