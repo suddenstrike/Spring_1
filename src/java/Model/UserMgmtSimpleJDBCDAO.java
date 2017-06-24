@@ -55,7 +55,11 @@ public class UserMgmtSimpleJDBCDAO implements UserMgmtDAOIface{
     @Override
     public int registerUser( BasicUser user ) {
             int rowCount = this.jdbcTemplate.queryForObject("select count(*) from tbl_user", Integer.class);
-  
+            
+            
+                this.jdbcTemplate.update("insert into tbl_user (user_name, user_email, user_pass) values (?, ?, ?)", user.getUserEmail(), user.getUserEmail(), user.getUserPass() );
+            
+            
         return 0;
     }
             
