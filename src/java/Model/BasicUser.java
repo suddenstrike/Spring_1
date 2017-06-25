@@ -16,6 +16,8 @@ public class BasicUser implements Serializable {
     
     private String UserEmail;    private String UserPass;
     
+    public BasicUser(){} ;
+    
     public BasicUser(String email, String pass) {
         setUserEmail( email );
         setUserPass( pass );

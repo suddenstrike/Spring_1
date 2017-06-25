@@ -28,13 +28,13 @@ public class UserMgmtModel implements UserMgmtIface{
    
     public void deregisterUser( String email ) {
        
-        userMgmtDAOFactory.getUserMgmtDAO(1).deregisterUser(email);
+        userMgmtDAOFactory.getUserMgmtDAO(2).deregisterUser(email);
     }
 
     public List<BasicUser> getUserList() {  
         
     
-        return userMgmtDAOFactory.getUserMgmtDAO(1).getUserList();
+        return userMgmtDAOFactory.getUserMgmtDAO(2).getUserList();
     }
 
     

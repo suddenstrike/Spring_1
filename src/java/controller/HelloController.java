@@ -6,7 +6,10 @@
 package controller;
 
 
+import Model.BasicUser;
+import Model.BasicUserExt;
 import Model.UserMgmtModel;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.validation.BindException;
@@ -68,12 +71,15 @@ protected ModelAndView onSubmit(
             BindException errors) throws Exception {
 
         Name name = (Name) command;
-        ModelAndView mv = new ModelAndView(getSuccessView());
-        mv.addObject("helloMessage", helloService.sayHello(name.getValue()));
         
         UserMgmtModel usrMgmtModel = new UserMgmtModel();
         usrMgmtModel.registerUser(name.getValue(), name.getValue());
-        
+        List<BasicUser> userList = usrMgmtModel.getUserList();
+        String str = BasicUserExt.ConcatUserList( userList );
+        ModelAndView mv = new ModelAndView(getSuccessView());
+        name.setValue( str );
+        mv.addObject("helloMessage", helloService.sayHello(name.getValue()));
+
         return mv;
 }
 

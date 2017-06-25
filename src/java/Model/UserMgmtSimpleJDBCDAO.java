@@ -5,10 +5,11 @@
  */
 package Model;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
-import javax.sql.DataSource;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 /**
@@ -57,7 +58,7 @@ public class UserMgmtSimpleJDBCDAO implements UserMgmtDAOIface{
             int rowCount = this.jdbcTemplate.queryForObject("select count(*) from tbl_user", Integer.class);
             
             
-                this.jdbcTemplate.update("insert into tbl_user (user_name, user_email, user_pass) values (?, ?, ?)", user.getUserEmail(), user.getUserEmail(), user.getUserPass() );
+                this.jdbcTemplate.update("insert into tbl_user (user_name, user_email, user_pass, IS_DELETED) values (?, ?, ?, 0)", user.getUserEmail(), user.getUserEmail(), user.getUserPass() );
             
             
         return 0;
@@ -71,7 +72,15 @@ public class UserMgmtSimpleJDBCDAO implements UserMgmtDAOIface{
 
     @Override
     public List<BasicUser> getUserList() {
-        return null;
+        List<BasicUser> userList = this.jdbcTemplate.query(
+        "select user_email, user_pass from tbl_user",
+        new RowMapper<BasicUser>() {
+            public BasicUser mapRow(ResultSet rs, int rowNum) throws SQLException {
+                BasicUser user = new BasicUser(rs.getString("user_email"),rs.getString("user_pass"));
+                return user;
+            }
+        });
+        return userList;
     }
 }
     
